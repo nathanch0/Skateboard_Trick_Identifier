@@ -18,6 +18,7 @@ def images_list(image_directory):
 
 def create_graph():
     # Creates a tensor graph in the specified directory
+    model_dir = 'imagenet'
     with gfile.FastGFile(os.path.join(model_dir,
                     'classify_image_graph_def.pb'), 'rb') as f:
         graph_def = tf.GraphDef()
@@ -36,7 +37,7 @@ def extraction(list_images):
 
     with tf.Session() as sess:
 
-    next_to_last_tensor = sess.graph.get_tensor_by_name('pool_3:0')
+        next_to_last_tensor = sess.graph.get_tensor_by_name('pool_3:0')
 
     for ind, image in enumerate(list_images):
         if (ind%100 == 0):
