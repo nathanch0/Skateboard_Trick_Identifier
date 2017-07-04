@@ -17,7 +17,12 @@ def images_list(image_directory):
     return image_list
 
 def create_graph():
-    # Creates a tensor graph in the specified directory
+    """
+    create_graph loads the inception model to memory, should be called before
+    calling extraction.
+
+    model_path: path to inception model in protobuf form.
+    """
     model_dir = 'imagenet'
     with gfile.FastGFile(os.path.join(model_dir,
                     'classify_image_graph_def.pb'), 'rb') as f:
@@ -27,7 +32,10 @@ def create_graph():
 
 def extraction(list_images):
     """
-    Take a list of image file paths, and return features.
+    extract_features computed the inception bottleneck feature for a list of images
+
+    image_paths: array of image path
+    return: 2-d array in the shape of (len(image_paths), 2048)
     """
     nb_features = 2048
     features = np.empty((len(list_images),nb_features))
@@ -54,4 +62,4 @@ def extraction(list_images):
 
     labels.append(re.split('_\d+',image.split('/')[1])[0])
 
-    return features, labels
+    return features
