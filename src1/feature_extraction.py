@@ -12,9 +12,49 @@ import pickle
 Credit to Kernix blog
 """
 
-def images_list(image_directory):
-    image_list = [image_directory+f for f in os.listdir(images_directory) if re.search('jpg|JPG', f)]
-    return image_list
+def image_list(image_dir):
+    """Builds a list of training images from the file system.
+      Analyzes the sub folders in the image directory, and returns a data structure
+      describing the lists of images for each label and their paths.
+      Args:
+        image_dir: String path to a folder containing subfolders of images.
+
+      Returns:
+        A dictionary containing an entry for each label subfolder
+      """
+    # Checks if the directory name even exists!
+    if not gfile.Exists(image_dir):
+        print("Image directory '" + image_dir + "' not found.")
+        return None
+
+    result = {}
+    sub_dirs = [x[0] for x in gfile.Walk(image_dir)] # This will create a list of sub directories i.e Kickflip, ollie
+
+    is_root_dir = True
+    for sub_dir in sub_dirs:
+        if is_root_dir:
+            is_root_dir = False # Because the first element is the root directory, we skip it to go into the sub directories
+            continue
+        extensions = ['jpg', 'JPG'] # Image extension
+        file_list = [] # File path list of all the images in the directory
+        dir_name = os.path.basename(sub_dir) # This will make the dir_name to be 'Kickflip' or 'Ollie'
+        if dir_name == image_dir:
+            continue
+        print("Looking for images in '" + dir_name + "'")
+        for extension in extensions:
+            file_glob = os.path.join(image_dir, dir_name, '*.' + extension) # Making a file path for all photos with given extension
+            file_list.extend(gfile.Glob(file_glob)) # This will add the 'file_glob' string to file_list
+        if not file_list:
+            print('No files have been found')
+            continue
+        if len(file_list) < 20: # This will check the length of the file_list
+            print('There is less than 20 photos in this directory! There may not be enough pictures!')
+
+        label_name = re.sub(r'[^a-z0-9]+', ' ', dir_name.lower()) #This makes the label name for each spacific Image
+        result[label_name] = {'dir':dir_name,
+                             'train':file_list}
+    return result
+
 
 def create_graph():
     """
