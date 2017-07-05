@@ -51,8 +51,10 @@ def image_list(image_dir):
             print('There is less than 20 photos in this directory! There may not be enough pictures!')
 
         label_name = re.sub(r'[^a-z0-9]+', ' ', dir_name.lower()) #This makes the label name for each spacific Image
-        result[label_name] = {'dir':dir_name,
-                             'train':file_list}
+
+        result[label_name] = file_list
+        #{'dir':dir_name,'train':file_list}
+
     return result
 
 
