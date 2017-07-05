@@ -55,8 +55,10 @@ def image_list(image_dir):
         result[label_name] = file_list
         #{'dir':dir_name,'train':file_list}
 
-    return result
-
+    final = []
+    for value in result.values():
+        final.extend(value)
+    return final
 
 def create_graph():
     """
@@ -89,19 +91,19 @@ def extraction(list_images):
 
         next_to_last_tensor = sess.graph.get_tensor_by_name('pool_3:0')
 
-    for ind, image in enumerate(list_images):
-        if (ind%100 == 0):
-            print('Processing %s...' % (image))
-        if not gfile.Exists(image):
-            tf.logging.fatal('File does not exist %s', image)
+        for ind, image in enumerate(list_images):
+            if (ind%100 == 0):
+                print('Processing %s...' % (image))
+            if not gfile.Exists(image):
+                tf.logging.fatal('File does not exist %s', image)
 
-    image_data = gfile.FastGFile(image, 'rb').read()
+        image_data = gfile.FastGFile(image, 'rb').read()
 
-    predictions = sess.run(next_to_last_tensor,
-                        {'DecodeJpeg/contents:0': image_data})
+        predictions = sess.run(next_to_last_tensor,
+                            {'DecodeJpeg/contents:0': image_data})
 
-    features[ind,:] = np.squeeze(predictions)
+        features[ind,:] = np.squeeze(predictions)
 
-    labels.append(re.split('_\d+',image.split('/')[1])[0])
+        labels.append(re.split('_\d+',image.split('/')[1])[0])
 
-    return features
+    return features, labels
