@@ -2,8 +2,7 @@ import os
 import pickle
 
 import sklearn
-from sklearn import grid_search
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVM
 
@@ -29,7 +28,7 @@ def train_svm_classifer(features, labels):
     svm = SVM(probability=True)
 
     # 10-fold cross validation, use 4 thread as each fold and each parameter set can be train in parallel
-    SVM = grid_search.GridSearchCV(svm, param,
+    SVM = GridSearchCV(svm, param,
             cv=10, n_jobs=4, verbose=3)
 
     # This will save the trained model in a pickle file to be used later

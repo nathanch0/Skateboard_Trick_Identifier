@@ -30,7 +30,7 @@ def predict_one(image_path):
         pushed into the function
     """
     feature_vector = feature.extraction([image_path])
-    model_path = 'pickle_files/svm_model.pkl'
+    model_path = '../pickle_files/svm_model.pkl'
     with open(model_path, 'rb') as s:
         model = pickle.load(s)
 
@@ -44,12 +44,12 @@ def predict_one(image_path):
 # Photo paths that I have tested on.
 # Capstone_photo/random_test_pictures/test_ollie_photo_two.jpg "Negative prediction"
 # Capstone_photo/ollie_test/IMG_8976.JPG "True Positive"
-# Capstone_photo/ollie_test/IMG_8995.JPG
-# Capstone_photo/random_test_pictures/Kickflip-test_photo.jpg "True Positive" internet photo
+# ../Capstone_photo/random_test_pictures/Kickflip-test_photo.jpg "True Positive" internet photo
 # Capstone_photo/random_test_pictures/kickflip-test_2.jpg "True Positive" internet kickflip photo
-# Capstone_photo/random_test_pictures/how-to-ollie-4.jpg "False classification"
-# Capstone_photo/random_test_pictures/ollie_test_1.jpg
+# ../Capstone_photo/random_test_pictures/how-to-ollie-4.jpg "False classification"
+# ../Capstone_photo/random_test_pictures/ollie_test_1.jpg
 # Capstone_photo/kickflip_test/IMG_8990.JPG "True Classification"
+#../Capstone_photo/random_test_pictures/test_ollie_picture.jpg "Use for testing"
 
 if __name__ == '__main__':
     image_path = input('Please input a file path for the image: ')

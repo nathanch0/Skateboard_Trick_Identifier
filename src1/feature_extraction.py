@@ -71,7 +71,7 @@ def create_graph():
     calling extraction. This is called in the extraction function.
     """
     model_dir = 'imagenet'
-    with gfile.FastGFile(os.path.join(model_dir,
+    with gfile.FastGFile(os.path.join('..',model_dir,
                     'classify_image_graph_def.pb'), 'rb') as f:
         graph_def = tf.GraphDef()
         graph_def.ParseFromString(f.read())
