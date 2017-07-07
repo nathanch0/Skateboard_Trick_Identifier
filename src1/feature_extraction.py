@@ -15,9 +15,11 @@ labels list.
 """
 
 def image_list(image_dir):
-    """Builds a list of training images from the file system.
+    """
+      Builds a list of training images from the file system.
       Analyzes the sub folders in the image directory, and returns a data structure
-      describing the lists of images for each label and their paths.
+      describing the lists of images for each label and their file paths.
+
       Args:
         image_dir: String path to a folder containing subfolders of images.
 
@@ -50,8 +52,6 @@ def image_list(image_dir):
         if not file_list:
             print('No files have been found')
             continue
-        if len(file_list) < 20: # This will check the length of the file_list
-            print('There is less than 20 photos in this directory! There may not be enough pictures!')
 
         label_name = re.sub(r'[^a-z0-9]+', ' ', dir_name.lower()) #This makes the label name for each spacific Image
 
@@ -81,9 +81,10 @@ def extraction(final_result):
     """
     extract_features computed the inception bottleneck feature for a list of images
     using tensorflow.
-
-    final_result: array of image path
-    return: 2-d array in the shape of (len(image_paths), 2048)
+    Args:
+        final_result: array of image path
+    Returns:
+        2-d array in the shape of (len(image_paths), 2048)
     """
 
     nb_features = 2048

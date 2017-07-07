@@ -2,34 +2,28 @@ import os
 import pickle
 
 import sklearn
-from sklearn import cross_validation, grid_search
+from sklearn import grid_search
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVM
-from sklearn.externals import joblib
 
 def train_svm_classifer(features, labels):
     """
     train_svm_classifer will train a SVM, saved the trained and SVM model and
     report the classification performance
 
-    features: array of input features
-    labels: array of labels associated with the input features
-    model_output_path: path for storing the trained svm model
+    Args:
+        features: array of input features
+        labels: array of labels associated with the input features
     """
     # Our test set will be 20% of the whole data set.
-    X_train, X_test, y_train, y_test = cross_validation.train_test_split(features, labels, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2)
 
-    param = [
-        {
-            "kernel": ["linear"],
-            "C": [1, 10, 100, 1000]
-        },
-        {
-            "kernel": ["rbf"],
-            "C": [1, 10, 100, 1000],
-            "gamma": [1e-2, 1e-3, 1e-4, 1e-5]
-        }
-    ]
+    param = [{"kernel": ["linear"],
+                "C": [1, 10, 100, 1000]},
+             {"kernel": ["rbf"],
+                "C": [1, 10, 100, 1000],
+                "gamma": [1e-2, 1e-3, 1e-4, 1e-5]}]
 
     # Probability is requested as True
     svm = SVM(probability=True)
