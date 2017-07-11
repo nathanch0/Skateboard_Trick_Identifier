@@ -14,7 +14,7 @@ in training directory. Then run the extraction function to populate the features
 labels list.
 """
 
-def image_list(image_dir):
+def image_list(image_dir, type_input='list'):
     """
       Builds a list of training images from the file system.
       Analyzes the sub folders in the image directory, and returns a data structure
@@ -22,6 +22,7 @@ def image_list(image_dir):
 
       Args:
         image_dir: String path to a folder containing subfolders of images.
+        type_input: This string will determine what is returned
 
       Returns:
         A dictionary containing an entry for each label subfolder
@@ -57,9 +58,12 @@ def image_list(image_dir):
 
         result[label_name] = file_list
 
-    for value in result.values():
-        final_result.extend(value)
-    return final_result
+    if type_input == 'dict':
+        return result
+    else:
+        for value in result.values():
+            final_result.extend(value)
+        return final_result
 
 """
 Credit to Kernix blog
