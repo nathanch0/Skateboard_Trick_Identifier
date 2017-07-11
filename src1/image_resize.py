@@ -13,6 +13,9 @@ def image_resize(image_list, mode='resize'):
     Args:
         image_list == List of image paths
         mode == Do you want to process it differently?
+                resize: Resizes the image to 299x299
+                distort: Makes images black and white
+                rotate: Rotates images 45 degrees
     Return:
         None
     """
@@ -32,24 +35,24 @@ def image_resize(image_list, mode='resize'):
             for key, value in image_list.items():
                 for element in value:
                     image = Image.open(element)
-                    new_image = image.thumbnail((299,299))
-                    distort = new_image.convert('L')
+                    #new_image = image.thumbnail((299,299))
+                    distorted = new_image.convert('L')
                     if key == 'ollie':
-                        distort.save('train_photos/ollie/color_' + element.split('/')[-1])
+                        distorted.save('train_photos/ollie/color_' + element.split('/')[-1])
                     elif key == 'kickflip':
-                        distort.save('train_photos/ollie/color_' + element.split('/')[-1])
+                        distorted.save('train_photos/ollie/color_' + element.split('/')[-1])
                 print('All photos have been re-colored')
 
         elif mode == 'rotate':
             for key, value in image_list.items():
                 for element in value:
                     image = Image.open(element)
-                    new_image = image.thumbnail((299,299))
-                    rotate = new_image.rotate(45)
+                    #new_image = image.thumbnail((299,299))
+                    rotated = new_image.rotate(45)
                     if key == 'ollie':
-                        distort.save('train_photos/ollie/rotate_' + element.split('/')[-1])
+                        rotated.save('train_photos/ollie/rotate_' + element.split('/')[-1])
                     elif key == 'kickflip':
-                        distort.save('train_photos/kickflip/rotate_' + element.split('/')[-1])
+                        rotated.save('train_photos/kickflip/rotate_' + element.split('/')[-1])
                 print('All photos have been rotated')
 
     elif len(image_list) == 1:
