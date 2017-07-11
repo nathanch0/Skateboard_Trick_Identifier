@@ -25,7 +25,8 @@ def image_list(image_dir, type_input='list'):
         type_input: This string will determine what is returned
 
       Returns:
-        A dictionary containing an entry for each label subfolder
+        A dictionary containing an entry for each label subfolder or a list of all
+        file paths
       """
     # Checks if the directory name even exists!
     if not gfile.Exists(image_dir):

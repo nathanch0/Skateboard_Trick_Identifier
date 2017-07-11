@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import feature_extraction as feature
+from image_resize import image_resize as resize
 
 """
 This script will take in a image path, and classify the image based on the
@@ -29,7 +30,7 @@ def predict_one(image_path):
         Predicted class, and Probability of prediction. Also the image being
         pushed into the function
     """
-    feature_vector = feature.extraction([image_path])
+    feature_vector = feature.extraction(resize([image_path]))
     model_path = '../pickle_files/svm_model.pkl'
     with open(model_path, 'rb') as s:
         model = pickle.load(s)
