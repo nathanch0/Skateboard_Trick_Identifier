@@ -4,7 +4,7 @@ import pickle
 import sklearn
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import confusion_matrix, classification_report
-from sklearn.svm import SVM
+from sklearn.svm import SVC
 
 def train_svm_classifer(features, labels):
     """
@@ -25,7 +25,7 @@ def train_svm_classifer(features, labels):
                 "gamma": [1e-2, 1e-3, 1e-4, 1e-5]}]
 
     # Probability is requested as True
-    svm = SVM(probability=True)
+    svm = SVC(probability=True)
 
     # 10-fold cross validation, use 4 thread as each fold and each parameter set can be train in parallel
     SVM = GridSearchCV(svm, param,

@@ -2,8 +2,8 @@ import pickle
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
-import feature_extraction as feature
-from image_resize import image_resize as resize
+import src1.feature_extraction as feature
+from src1.image_resize import image_resize as resize
 
 """
 This script will take in a image path, and classify the image based on the
