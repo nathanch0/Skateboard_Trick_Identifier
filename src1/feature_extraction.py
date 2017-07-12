@@ -103,15 +103,15 @@ def extraction(final_result):
         next_to_last_tensor = sess.graph.get_tensor_by_name('pool_3:0')
 
         for idx, image in enumerate(final_result):
-            if (idx%200 == 0):
-                print('Processing %s...' % (image))
             if not gfile.Exists(image):
                 tf.logging.fatal('File does not exist %s', image)
-                image_data = gfile.FastGFile(image, 'rb').read()
-                predictions = sess.run(next_to_last_tensor,
-                            {'DecodeJpeg/contents:0': image_data})
-                features[ind,:] = np.squeeze(predictions)
-                labels.append(re.split('_\d+',image.split('/')[1])[0])
+            if (idx%200 == 0):
+                print('Processing %s...' % (image))
+            image_data = gfile.FastGFile(image, 'rb').read()
+            predictions = sess.run(next_to_last_tensor,
+                        {'DecodeJpeg/contents:0': image_data})
+            features[idx,:] = np.squeeze(predictions)
+            labels.append(re.split('_\d+',image.split('/')[1])[0])
 
     if len(labels) > 1:
         model_output_path = 'pickle_files/'
@@ -122,4 +122,4 @@ def extraction(final_result):
             pickle.dump(labels, l)
         print('Extraction is completed. Please train the model now!')
     else:
-        return features, labels
+        return features

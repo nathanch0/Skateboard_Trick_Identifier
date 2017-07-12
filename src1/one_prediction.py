@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import src1.feature_extraction as feature
-from src1.image_resize import image_resize as resize
+from src1.image_resize import image_resize
 
 """
 This script will take in a image path, and classify the image based on the
@@ -30,8 +30,15 @@ def predict_one(image_path):
         Predicted class, and Probability of prediction. Also the image being
         pushed into the function
     """
-    feature_vector = feature.extraction(resize([image_path]))
-    model_path = '../pickle_files/svm_model.pkl'
+    """
+    The re-size will give not the image_path, so we need to save the resized image_path
+    to a file location and use that new file location to be added into the feature vector object
+    """
+
+    re_size = image_resize([image_path])
+    predicted_image_path = 'project_photos/one_prediction/predicted.jpg'
+    feature_vector = feature.extraction([predicted_image_path])
+    model_path = 'pickle_files/svm_model.pkl'
     with open(model_path, 'rb') as s:
         model = pickle.load(s)
 

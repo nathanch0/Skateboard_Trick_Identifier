@@ -53,9 +53,9 @@ def train_svm_classifer(features, labels):
     #     print("Labels: {0}\n".format(",".join(labels)))
     #     print(confusion_matrix(y_test, y_predict, labels=labels))
 
-if __name__ == '__main__':
-    with open('pickle_files/features.pkl', 'rb') as f:
-        features = pickle.load(f)
-    with open('pickle_files/labels.pkl', 'rb') as l:
-        labels = pickle.load(l)
-    train_svm_classifer(features,labels)
+# if __name__ == '__main__':
+#     with open('pickle_files/features.pkl', 'rb') as f:
+#         features = pickle.load(f)
+#     with open('pickle_files/labels.pkl', 'rb') as l:
+#         labels = pickle.load(l)
+#     train_svm_classifer(features,labels)

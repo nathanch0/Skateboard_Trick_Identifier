@@ -58,4 +58,5 @@ def image_resize(image_list, mode='resize'):
     elif len(image_list) == 1:
         new_image = Image.open(image_list[0])
         new_image.thumbnail((299,299))
-        return list(new_image)
+        new_image.save('project_photos/one_prediction/predicted.jpg')
+        return new_image
