@@ -5,6 +5,7 @@ import sklearn
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVC
+import multiprocessing
 
 def train_svm_classifer(features, labels):
     """
@@ -29,7 +30,7 @@ def train_svm_classifer(features, labels):
 
     # 10-fold cross validation, use 4 thread as each fold and each parameter set can be train in parallel
     SVM = GridSearchCV(svm, param,
-            cv=10, n_jobs=4, verbose=3)
+            cv=10, n_jobs=multiprocessing.cpu_count(), verbose=3)
 
     # This will save the trained model in a pickle file to be used later
     model = SVM.fit(X_train, y_train)
