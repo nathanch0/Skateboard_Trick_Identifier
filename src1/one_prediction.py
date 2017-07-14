@@ -47,10 +47,10 @@ def predict_one(image_path):
 
     print('\nYour prediction...')
     if prediction_class == 'kickflip':
-        print(prediction_class, prediction[0])
+        print(prediction_class, prediction[0][0])
         image_show(image_path)
     else:
-        print(prediction_class, prediction[1])
+        print(prediction_class, prediction[0][1])
         image_show(image_path)
 
 # Photo paths that I have tested on.
