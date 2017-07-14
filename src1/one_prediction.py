@@ -46,15 +46,15 @@ def predict_one(image_path):
     prediction = model.predict_proba(feature_vector)
 
     print('\nYour prediction...')
-    print(prediction_class, prediction)
-    image_show(image_path)
+    if prediction_class == 'kickflip'
+        print(prediction_class, prediction[0])
+        image_show(image_path)
+    else:
+        print(prediction_class, prediction[1])
+        image_show(image_path)
 
 # Photo paths that I have tested on.
 
 # ../Capstone_photo/random_test_pictures/ollie_test_1.jpg
 # ../Capstone_photo/random_test_pictures/grahamrussell_ollie1.jpg
 # ../Capstone_photo/random_test_pictures/test_ollie_picture.jpg "Use for testing" False classification
-
-if __name__ == '__main__':
-    image_path = input('Please input a file path for the image: ')
-    predict_one(str(image_path))
