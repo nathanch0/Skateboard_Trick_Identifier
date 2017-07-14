@@ -46,7 +46,7 @@ def predict_one(image_path):
     prediction = model.predict_proba(feature_vector)
 
     print('\nYour prediction...')
-    if prediction_class == 'kickflip'
+    if prediction_class == 'kickflip':
         print(prediction_class, prediction[0])
         image_show(image_path)
     else:
