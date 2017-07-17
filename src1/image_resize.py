@@ -19,7 +19,7 @@ def image_resize(image_list, mode='resize'):
     Return:
         None
     """
-    if type(image_list) == 'dict':
+    if type(image_list) == dict:
         if mode == 'resize':
             for key, value in image_list.items():
                 for element in value:
@@ -29,6 +29,8 @@ def image_resize(image_list, mode='resize'):
                         new_image.save('train_photos/ollie/new_' + element.split('/')[-1])
                     elif key == 'kickflip':
                         new_image.save('train_photos/kickflip/new_' + element.split('/')[-1])
+                    elif key == 'tre flip':
+                        new_image.save('train_photos/tre-flip/new_' + element.split('/')[-1])
                 print('All photos have been re-sized')
 
         elif mode == 'distort':
@@ -36,11 +38,13 @@ def image_resize(image_list, mode='resize'):
                 for element in value:
                     image = Image.open(element)
                     #new_image = image.thumbnail((299,299))
-                    distorted = new_image.convert('L')
+                    distorted = image.convert('L')
                     if key == 'ollie':
                         distorted.save('train_photos/ollie/color_' + element.split('/')[-1])
                     elif key == 'kickflip':
                         distorted.save('train_photos/ollie/color_' + element.split('/')[-1])
+                    elif key == 'tre flip':
+                        distorted.save('train_photos/tre-flip/color_' + element.split('/')[-1])
                 print('All photos have been re-colored')
 
         elif mode == 'rotate':
@@ -48,15 +52,17 @@ def image_resize(image_list, mode='resize'):
                 for element in value:
                     image = Image.open(element)
                     #new_image = image.thumbnail((299,299))
-                    rotated = new_image.rotate(45)
+                    rotated = image.rotate(45)
                     if key == 'ollie':
                         rotated.save('train_photos/ollie/rotate_' + element.split('/')[-1])
                     elif key == 'kickflip':
                         rotated.save('train_photos/kickflip/rotate_' + element.split('/')[-1])
+                    elif key == 'tre flip':
+                        rotated.save('train_photos/tre-flip/rotate_' + element.split('/')[-1])
                 print('All photos have been rotated')
 
     elif len(image_list) == 1:
         new_image = Image.open(image_list[0])
         new_image.thumbnail((299,299))
-        new_image.save('project_photos/one_prediction/predicted.jpg')
+        new_image.save('one_prediction/predicted.jpg')
         return new_image
