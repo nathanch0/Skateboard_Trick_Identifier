@@ -19,3 +19,5 @@ The classification will be done training a SVM(Support Vector Machine). From the
 
 # Evaluation
 The model will show the percentage of confidence that the machine will be able to correctly classify the trick.
+
+![demo](kevin_kickflip_presentation.gif)
